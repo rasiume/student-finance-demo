@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Student Finance - Content Design Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Student Finance England</h1>
+    </div>
+    
+    <div class="container">
+        <div class="demo-note">
+            <strong>📝 Content Design Portfolio Demo</strong> - Just to note, this is an interactive demonstration of user-centered content design principles. Created by Umerrah Dunrod.
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 20%"></div>
+        </div>
+        
+        <!-- Screen 1: Landing Page -->
+        <div class="screen active" id="screen1">
+            <h2>Apply for student finance in 15 minutes</h2>
+            <p class="intro-text">Get help with tuition fees and living costs for university or college. You can apply if you're starting a course in September 2025.</p>
+            
+            <div class="info-box">
+                <h3>What you'll need:</h3>
+                <ul>
+                    <li>National Insurance number</li>
+                    <li>Bank account details</li>
+                    <li>Course details from your university</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="nextScreen(2)">Start your application →</button>
+            <a class="link" onclick="alert('This would take users to an eligibility checker')">Not sure if you're eligible? Check now</a>
+        </div>
+        
+        <!-- Screen 2: Eligibility Check -->
+        <div class="screen" id="screen2">
+            <h2>Check if you can apply</h2>
+            
+            <div class="form-group">
+                <label>Are you a UK resident?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="resident" id="residentYes" value="yes">
+                        <label for="residentYes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="resident" id="residentNo" value="no">
+                        <label for="residentNo">No</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Have you lived in the UK for the last 3 years?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="lived" id="livedYes" value="yes">
+                        <label for="livedYes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="lived" id="livedNo" value="no">
+                        <label for="livedNo">No</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Is your course starting in 2025?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="course2025" id="course2025Yes" value="yes">
+                        <label for="course2025Yes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="course2025" id="course2025No" value="no">
+                        <label for="course2025No">No</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert" id="eligibilityAlert">
+                <p><span class="alert-icon">⚠️</span> <strong>Based on your answers, you may not be eligible.</strong></p>
+                <p>Contact Student Finance on 0300 100 0607 for advice about your situation.</p>
+            </div>
+            
+            <button class="btn" onclick="checkEligibility()">Continue</button>
+        </div>
+        
+        <!-- Screen 3: Personal Details -->
+        <div class="screen" id="screen3">
+            <h2>Your details</h2>
+            
+            <div class="error-list" id="errorList">
+                <h3>⚠️ There's a problem</h3>
+                <p>You need to fix the following:</p>
+                <ul id="errorItems"></ul>
+            </div>
+            
+            <form id="personalForm">
+                <div class="form-group">
+                    <label for="firstName">Legal first name <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName">
+                    <p class="helper-text">As shown on your passport or birth certificate</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Legal last name <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ni">National Insurance number <span class="required">*</span></label>
+                    <input type="text" id="ni" name="ni" maxlength="13" placeholder="QQ 12 34 56 C">
+                    <p class="helper-text">It's on your payslip or P60. Format: QQ 12 34 56 C</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Date of birth <span class="required">*</span></label>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="dobDay" placeholder="DD" min="1" max="31" style="width: 80px;">
+                        <input type="number" id="dobMonth" placeholder="MM" min="1" max="12" style="width: 80px;">
+                        <input type="number" id="dobYear" placeholder="YYYY" min="1900" max="2010" style="width: 120px;">
+                    </div>
+                </div>
+                
+                <button type="button" class="btn" onclick="validatePersonalDetails()">Save and continue</button>
+            </form>
+        </div>
+        
+        <!-- Screen 4: Success -->
+        <div class="screen" id="screen4">
+            <div class="success-banner">
+                <h3>✓ Application submitted</h3>
+            </div>
+            
+            <h2>What happens next</h2>
+            <p class="intro-text">We've sent a confirmation email to: <strong>your.email@example.com</strong></p>
+            
+            <p>You'll get a decision within 6 weeks.</p>
+            
+            <div class="reference-box">
+                <p><strong>Your reference number: SF-2025-123456</strong></p>
+                <p style="margin-top: 0.5rem; font-size: 0.875rem;">Save this number — you'll need it to track your application.</p>
+            </div>
+            
+            <div class="next-steps">
+                <h3>What you can do now:</h3>
+                <ul>
+                    <li><a href="#">Check your application status</a></li>
+                    <li><a href="#">Add course details if they change</a></li>
+                    <li><a href="#">Contact us if you have questions</a></li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="nextScreen(1)">Start over</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
